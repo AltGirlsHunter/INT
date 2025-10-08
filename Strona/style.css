@@ -1,0 +1,134 @@
+* {
+    font-family: "Story Script", sans-serif;
+}
+
+body{
+    background-color: bisque;
+    margin: 0px;
+}
+
+#navBar {
+    display: flex;
+    justify-content: end;
+    margin: 20px 0px;
+    height: 30px;
+    align-items: center;
+}
+
+#navBar a {
+    margin-right: 20px;
+    padding: 5px 10px;
+    text-decoration: none;
+    font-size: 1.3rem;
+    color: black;
+    font-weight: bold;
+}
+
+#navBar a:hover {
+    border-bottom: 5px solid orange;
+    color: rgb(59, 38, 0);
+}
+
+@media screen and (max-width: 600px) {
+    #navBar {
+        flex-direction: column;
+        align-items: end;
+    }
+}
+
+#heroBaner {
+    background-image: url(restaurantHero.jpg);
+    background-size: cover;
+    background-position: 0% 20%;
+    width: 100vw;
+    height: 80vh;
+}
+
+#offer, #gallery, #contact, .itemsWraper, footer {
+    display: flex;
+    width: 100vw;
+    height: fit-content;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+h1 {
+    font-size: 2.5rem;
+}
+
+h2 {
+    font-size: 1.5rem;
+}
+
+#offer, #gallery {
+    flex-direction: column;
+    margin: 50px 0px;
+}
+
+.itemsWraper {
+    flex-direction: row;
+}
+
+#offer .item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    margin: 0px 10px;
+}
+
+#offer img {
+    width: 120px;
+}
+
+#offer .item p {
+    max-width: 200px;
+    font-size: 1.1rem;
+    text-align: center;
+}
+
+#gallery img {
+    width: 200px;
+    padding: 10px;
+}
+
+#gallery img:hover {
+   transform: scale(1.1);
+   transition: all 100ms linear;
+}
+
+footer {
+    flex-direction: column;
+    background-color: rgb(56, 27, 3);
+    color: white;
+    padding: 30px;
+}
+
+footer form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 200px;
+    height: fit-content;
+    border: 2px solid white;
+    padding: 10px 20px 20px 20px;
+}
+
+footer form div {
+    display: flex;
+    flex-direction: column;  
+}
+
+footer form div label {
+    margin-top: 10px;
+}
+
+footer button{
+    width: 100px;
+    margin-top: 10px;
+    background-color: darkred;
+    color: white;
+}
