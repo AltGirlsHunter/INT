@@ -10,12 +10,12 @@
     <%- include('../partials/header') %>
     <main>
         <article>
-            <h2><%= article.title%></h2>
+            <h2><%= user.userName></h2>
             <p class = "meta">
-                Autor: <%= article.author %> | Data publikacji: <%= article.createAt %>
+                Data założenia konta: <%= user.createAt %>
             </p>
             <div>
-                <%= article.content %>
+                <%= user.description %>
             </div>
         </article>
 

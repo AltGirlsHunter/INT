@@ -17,17 +17,14 @@
         </ul>
       <% } %>
 
-      <form action="/articles" method="post">
-        <label for="title">Tytuł:</label>
-        <input type="text" id="title" name="title" value="<%= article.title || '' %>">
+      <form action="/users" method="post">
+        <label for="userName">Tytuł:</label>
+        <input type="text" id="userName" name="title" value="<%= user.userName || '' %>">
 
-        <label for="author">Autor:</label>
-        <input type="text" id="author" name="author" value="<%= article.author || '' %>">
+        <label for="description">Treść:</label>
+        <textarea id="description" name="content"><%= user.description || '' %></textarea>
 
-        <label for="content">Treść:</label>
-        <textarea id="content" name="content"><%= article.content || '' %></textarea>
-
-        <button type="submit">Dodaj artykuł</button>
+        <button type="submit">Dodaj Użytkownika</button>
       </form>
     </main>
     <%- include('../partials/footer') %>

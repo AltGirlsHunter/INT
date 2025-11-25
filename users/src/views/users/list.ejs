@@ -9,15 +9,15 @@
 <body>
     <%- include('../partials/header') %>
     <main>
-        <h2>lista artykułów</h2>
+        <h2>lista użytkowników</h2>
 
         <ul>
-            <% if(articles.length === 0) {%>
-                <li>brak artykułów</li>
+            <% if(users.length === 0) {%>
+                <li>brak użytkowników</li>
                 <% } else { %>
-                    <% articles.forEach(article => { %>
+                    <% users.forEach(user => { %>
                         <li>
-                            <a href = "/articles/<%= article.slug %>"><%= article.title%></a>
+                            <a href = "/users/<%= user.slug %>"><%= user.userName%></a>
                         </li>
                         
                    <% }); %>
