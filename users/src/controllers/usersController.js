@@ -1,8 +1,8 @@
 const userService = require('../services/userServices');
 
 async function index(req,res){
-    const articles = await userService.listUsers();
-    res.render('users/list', {title: "Użytkownicy", articles});
+    const users = await userService.listUsers();
+    res.render('users/list', {title: "Użytkownicy", users});
 }
 
 async function show(req,res){
@@ -10,8 +10,8 @@ async function show(req,res){
     const user = await userService.getUsersBySlug(slug);
     if(!user){
         return res.status(404).render('users/error', { 
-          title: 'Błąd 404 – Artykuł nie znaleziony', 
-          error: 'Artykuł nie znaleziony' 
+          title: 'Błąd 404 – Użytkownik nie znaleziony', 
+          error: 'Użytkownik nie znaleziony' 
         });
     
     }
@@ -33,13 +33,13 @@ async function create(req,res){
     if(!description || description.trim().length < 10) errors.push("wymagana tresc");
 
     if(errors.length > 0) {
-        return res.status(400).render('articles/new', {
+        return res.status(400).render('users/new', {
             title: "nowy artykul",
             errors,
-            article: {userName,description}
+            user: {userName,description}
         });
     }
-    const newArticle = await userService.createArticle({userName,description});
-    res.status(300).redirect(`/articles/${newArticle.slug}`);
+    const newUser = await userService.createUser({userName,description});
+    res.status(300).redirect(`/users/${newUser.slug}`);
 }
 module.exports = {index,show,newForm,create};

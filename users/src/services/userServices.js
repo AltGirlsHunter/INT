@@ -38,4 +38,4 @@ async function createUser({userName,description}){
     return newUser;
 }
 
-module.exports = {listUsers,getArticlesBySlug: getUsersBySlug,createUser}
+module.exports = {listUsers, getUsersBySlug,createUser}
