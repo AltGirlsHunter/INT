@@ -1,0 +1,25 @@
+<header>
+    <h1>ALX</h1>
+    <nav>
+        <a href="/products">Produkty</a>
+
+        <% if (!userId) { %>
+            <a href="/login">Logowanie</a>
+            <a href="/register">Rejestracja</a>
+        <% } %>
+
+        <% if (role === 'client') { %>
+            <a href="/client/cart">Koszyk</a>
+        <% } %>
+
+        <% if (role === 'seller') { %>
+            <a href="/seller/products">Moje produkty</a>
+            <a href="/seller/orders">Zamówienia</a>
+            <a href="/seller/reviews">Opinie</a>
+        <% } %>
+
+        <% if (userId) { %>
+            <a href="/logout">Wyloguj</a>
+        <% } %>
+    </nav>
+</header>

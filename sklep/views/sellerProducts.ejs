@@ -1,0 +1,23 @@
+<%- include('partials/header') %>
+
+<h2>Moje produkty</h2>
+
+<h3>Dodaj nowy produkt</h3>
+<form method="POST" action="/seller/products">
+    <input type="text" name="title" placeholder="Tytuł" required>
+    <textarea name="description" placeholder="Opis" required></textarea>
+    <input type="number" name="price" placeholder="Cena" required>
+    <button>Dodaj produkt</button>
+</form>
+
+<% products.forEach(product => { %>
+    <div>
+        <h3><%= product.title %></h3>
+        <p>Cena: <%= product.price %> zł</p>
+        <form method="POST" action="/seller/products/delete/<%= product._id %>">
+            <button>Usuń</button>
+        </form>
+    </div>
+<% }) %>
+
+<%- include('partials/footer') %>

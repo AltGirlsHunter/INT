@@ -29,7 +29,7 @@ async function create(req,res){
     const {userName,description} = req.body;
     const errors = [];
 
-    if(!title || description.trim().length < 3) errors.push("wymagany tytul");
+    if(!userName || description.trim().length < 3) errors.push("wymagany tytul");
     if(!description || description.trim().length < 10) errors.push("wymagana tresc");
 
     if(errors.length > 0) {

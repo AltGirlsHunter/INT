@@ -1,0 +1,32 @@
+<%- include('../partials/header') %>
+
+<h2>Clicker</h2>
+
+
+<p>Twoje kliknięcia:</p>
+<h3 id="clickCount"><%= clicks %></h3>
+
+<button id="clickBtn">Kliknij</button>
+
+<script>
+    const clickCount = document.getElementById("clickCount");
+    const clickBtn = document.getElementById("clickBtn");
+
+    clickBtn.addEventListener("click", async () => {
+        const res = await fetch("/clicker/click", {
+            method: "POST"
+        });
+
+        const data = await res.json();
+        clickCount.textContent = data.clicks;
+    });
+
+    setInterval(async () => {
+        const res = await fetch("/clicker/state");
+        const data = await res.json();
+        clickCount.textContent = data.clicks;
+    }, 5000);
+
+</script>
+
+<%- include('../partials/footer') %>

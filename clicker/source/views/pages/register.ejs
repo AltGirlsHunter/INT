@@ -1,0 +1,20 @@
+<%- include('../partials/header') %>
+
+<h2>Rejestracja</h2>
+<form method="POST" action="/register">
+    <input type="email" name="email" placeholder="Email" required>
+    <input type="password" name="password" placeholder="Hasło" required>
+    
+    <select name="ethnicy" required>
+        <option value="notBlack">White</option>
+        <option value="black">Black</option>
+        <option value="notBlack">Asian</option>
+        <option value="notBlack">Latino</option>
+        <option value="notBlack">Other</option>
+
+    </select>
+
+    <button>Register</button>
+</form>
+
+<%- include('../partials/footer') %>

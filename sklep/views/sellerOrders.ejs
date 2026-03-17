@@ -1,0 +1,16 @@
+<%- include('partials/header') %>
+
+<h2>Zamówienia</h2>
+
+<% orders.forEach(order => { %>
+    <div>
+        <p>Zamówienie: <%= order._id %></p>
+        <ul>
+            <% order.products.forEach(p => { %>
+                <li><%= p.product %> - Ilość: <%= p.quantity %></li>
+            <% }) %>
+        </ul>
+    </div>
+<% }) %>
+
+<%- include('partials/footer') %>

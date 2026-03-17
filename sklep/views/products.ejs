@@ -1,0 +1,34 @@
+<%- include('partials/header') %>
+
+<h2>Lista produktów</h2>
+
+<form method="GET" action="/products">
+    <input type="text" name="search" placeholder="Szukaj">
+    <input type="number" name="min" placeholder="Cena min">
+    <input type="number" name="max" placeholder="Cena max">
+
+    <select name="sort">
+        <option value="">Sortuj</option>
+        <option value="price_asc">Cena rosnąco</option>
+        <option value="price_desc">Cena malejąco</option>
+    </select>
+
+    <button type="submit">Filtruj</button>
+</form>
+
+<% products.forEach(product => { %>
+    <div>
+        <h3><%= product.title %></h3>
+        <p><%= product.description %></p>
+        <p>Cena: <%= product.price %> zł</p>
+        <a href="/products/<%= product._id %>">Szczegóły</a>
+
+        <% if (role === 'client') { %>
+            <form method="POST" action="/client/cart/add/<%= product._id %>" style="display:inline;">
+                <button>Dodaj do koszyka</button>
+            </form>
+        <% } %>
+    </div>
+<% }) %>
+
+<%- include('partials/footer') %>

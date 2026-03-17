@@ -1,0 +1,23 @@
+<%- include('partials/header') %>
+
+<h2>Twój koszyk</h2>
+
+<% if (cart.length === 0) { %>
+    <p>Twój koszyk jest pusty.</p>
+<% } else { %>
+    <% cart.forEach(item => { %>
+        <div>
+            <p>Produkt ID: <%= item.product %></p>
+            <p>Ilość: <%= item.quantity %></p>
+            <form method="POST" action="/client/cart/remove/<%= item.product %>">
+                <button>Usuń</button>
+            </form>
+        </div>
+    <% }) %>
+
+    <form method="POST" action="/client/order">
+        <button>Złóż zamówienie</button>
+    </form>
+<% } %>
+
+<%- include('partials/footer') %>
