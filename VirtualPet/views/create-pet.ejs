@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <title>Stwórz zwierzaka – Virtual Pet</title>
+</head>
+<body>
+  <h1>Stwórz swojego zwierzaka</h1>
+  <% if (error) { %>
+    <p style="color:red;"><%= error %></p>
+  <% } %>
+  <form method="POST" action="/pet/create">
+    <label>Imię zwierzaka:<br>
+      <input type="text" name="name" required>
+    </label><br><br>
+    <button type="submit">Stwórz</button>
+  </form>
+</body>
+</html>

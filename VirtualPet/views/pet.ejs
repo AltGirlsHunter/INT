@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <title><%= pet.name %> – Virtual Pet</title>
+</head>
+<body>
+  <h1>Twój zwierzak: <%= pet.name %></h1>
+
+  <% if (statuses.length > 0) { %>
+    <div>
+      <strong>Uwaga!</strong>
+      <ul>
+        <% statuses.forEach(s => { %>
+          <li><%= pet.name %> jest <%= s %>!</li>
+        <% }) %>
+      </ul>
+    </div>
+  <% } %>
+
+  <ul>
+    <li>Głód: <%= pet.hunger %> / 100</li>
+    <li>Szczęście: <%= pet.happiness %> / 100</li>
+    <li>Energia: <%= pet.energy %> / 100</li>
+  </ul>
+
+  <form method="POST" action="/pet/feed">
+    <button type="submit">Nakarm (głód -10)</button>
+  </form>
+
+  <form method="POST" action="/pet/play">
+    <button type="submit">Zagraj (szczęście +10, energia -5)</button>
+  </form>
+
+  <form method="POST" action="/pet/sleep">
+    <button type="submit">Śpij (energia +20)</button>
+  </form>
+
+  <br>
+  <a href="/auth/logout">Wyloguj się</a>
+</body>
+</html>
