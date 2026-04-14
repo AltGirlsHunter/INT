@@ -1,0 +1,40 @@
+<%- include('../partials/header') %>
+
+<div class="page-header">
+  <h1 class="page-title">Gracze</h1>
+  <p class="page-sub">Wszyscy zarejestrowani gracze na platformie</p>
+</div>
+
+<%- include('../partials/flash') %>
+
+<div class="table-wrapper">
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Gracz</th>
+        <th>Saldo</th>
+        <th>Dołączył</th>
+        <th>Akcje</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% users.forEach((u, i) => { %>
+        <tr class="<%= u.id === user.id ? 'row-highlight' : '' %>">
+          <td><%= i + 1 %></td>
+          <td class="user-cell">
+            <span class="user-avatar"><%= u.username.charAt(0).toUpperCase() %></span>
+            <span><%= u.username %> <% if (u.id === user.id) { %><span class="badge badge-info">Ty</span><% } %></span>
+          </td>
+          <td class="balance-cell"> <%= parseFloat(u.balance).toFixed(2) %> G</td>
+          <td><%= new Date(u.created_at).toLocaleDateString('pl-PL') %></td>
+          <td>
+            <a href="/users/<%= u.id %>" class="btn btn-sm btn-ghost">Profil</a>
+          </td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</div>
+
+<%- include('../partials/footer') %>

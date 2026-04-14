@@ -1,0 +1,53 @@
+<%- include('../partials/header') %>
+
+<div class="page-header">
+  <h1 class="page-title">Mój ekwipunek</h1>
+  <p class="page-sub">Twoje przedmioty · Saldo: <strong class="accent"> <%= parseFloat(user.balance).toFixed(2) %> G</strong></p>
+</div>
+
+<%- include('../partials/flash') %>
+
+<% if (myItems.length === 0) { %>
+  <div class="empty-state">
+    <div class="empty-icon">pusty</div>
+    <h3>Ekwipunek jest pusty</h3>
+    <p>Nie posiadasz jeszcze żadnych przedmiotów.</p>
+    <a href="/shop" class="btn btn-primary">Idź do sklepu</a>
+  </div>
+<% } else { %>
+  <div class="items-grid">
+    <% myItems.forEach(item => { %>
+      <div class="item-card rarity-card-<%= item.rarity %> <%= item.is_listed ? 'card-listed' : '' %>">
+        <div class="item-card-top">
+          <%- include('../partials/rarity', { rarity: item.rarity }) %>
+          <% if (item.is_listed) { %>
+            <span class="badge badge-success">Na sprzedaż</span>
+          <% } %>
+        </div>
+        <div class="item-icon">⚔️</div>
+        <h3 class="item-name"><%= item.name %></h3>
+        <p class="item-desc"><%= item.description %></p>
+        <span class="item-game-tag"><%= item.game %></span>
+
+        <% if (item.is_listed) { %>
+          <div class="item-listed-info">
+            Wystawiony za <strong><%= parseFloat(item.price_listed).toFixed(2) %> G</strong>
+          </div>
+          <form action="/items/<%= item.listing_id %>/unlist" method="POST">
+            <button type="submit" class="btn btn-ghost btn-sm btn-full">✖ Wycofaj ofertę</button>
+          </form>
+        <% } else { %>
+          <form action="/items/<%= item.listing_id %>/list" method="POST" class="list-form">
+            <div class="price-input-row">
+              <input type="number" name="price" class="form-input form-input-sm"
+                placeholder="Cena w G" min="0.01" step="0.01" required>
+              <button type="submit" class="btn btn-primary btn-sm">Wystaw</button>
+            </div>
+          </form>
+        <% } %>
+      </div>
+    <% }) %>
+  </div>
+<% } %>
+
+<%- include('../partials/footer') %>

@@ -1,0 +1,52 @@
+<%- include('../partials/header') %>
+
+<div class="page-header">
+  <h1 class="page-title">Sklep</h1>
+  <p class="page-sub">Przedmioty dostępne bezpośrednio od platformy</p>
+</div>
+
+<%- include('../partials/flash') %>
+
+<% if (shopItems.length === 0) { %>
+  <div class="empty-state">
+    <h3>Sklep tymczasowo niedostępny</h3>
+    <p>Brak przedmiotów w sklepie. Sprawdź rynek graczy!</p>
+    <a href="/items" class="btn btn-primary">Rynek graczy</a>
+  </div>
+<% } else { %>
+  <div class="items-grid">
+    <% shopItems.forEach(item => { %>
+      <div class="item-card rarity-card-<%= item.rarity %> shop-card">
+        <div class="item-card-top">
+          <%- include('../partials/rarity', { rarity: item.rarity }) %>
+        </div>
+        <div class="item-icon">⚔️</div>
+        <h3 class="item-name"><%= item.name %></h3>
+        <p class="item-desc"><%= item.description %></p>
+        <span class="item-game-tag"><%= item.game %></span>
+        <div class="item-card-bottom">
+          <span class="item-price"> <%= parseFloat(item.price).toFixed(2) %> G</span>
+          <% if (item.stock === -1) { %>
+            <span class="stock-info">∞ dostępne</span>
+          <% } else { %>
+            <span class="stock-info <%= item.stock < 5 ? 'stock-low' : '' %>">
+              <%= item.stock %> szt.
+            </span>
+          <% } %>
+        </div>
+        <% if (user) { %>
+          <form action="/shop/buy/<%= item.shop_item_id %>" method="POST">
+            <button type="submit" class="btn btn-primary btn-sm btn-full"
+              onclick="return confirm('Kupić <%= item.name %> za <%= parseFloat(item.price).toFixed(2) %> G?')">
+              🛒 Kup za <%= parseFloat(item.price).toFixed(2) %> G
+            </button>
+          </form>
+        <% } else { %>
+          <a href="/auth/login" class="btn btn-outline btn-sm btn-full">Zaloguj się aby kupić</a>
+        <% } %>
+      </div>
+    <% }) %>
+  </div>
+<% } %>
+
+<%- include('../partials/footer') %>

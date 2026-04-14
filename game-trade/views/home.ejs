@@ -1,0 +1,83 @@
+<%- include('partials/header') %>
+
+<%- include('partials/flash') %>
+
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Platforma graczy</p>
+    <h1 class="hero-title">Handluj przedmiotami<br><span class="accent">z gier</span></h1>
+    <p class="hero-subtitle">Kupuj, sprzedawaj i wymieniaj unikalne przedmioty ze swoich ulubionych gier. Bezpiecznie i szybko.</p>
+    <div class="hero-cta">
+      <% if (!user) { %>
+        <a href="/auth/register" class="btn btn-primary btn-lg">Zacznij teraz</a>
+        <a href="/items" class="btn btn-outline btn-lg">Przeglądaj rynek</a>
+      <% } else { %>
+        <a href="/items" class="btn btn-primary btn-lg">Idź na rynek</a>
+        <a href="/shop" class="btn btn-outline btn-lg">Wejdź do sklepu</a>
+      <% } %>
+    </div>
+  </div>
+</section>
+
+<section class="stats-bar">
+  <div class="stat-item">
+    <span class="stat-value"><%= stats.total_users %></span>
+    <span class="stat-label">Graczy</span>
+  </div>
+  <div class="stat-divider"></div>
+  <div class="stat-item">
+    <span class="stat-value"><%= stats.active_listings %></span>
+    <span class="stat-label">Aktywnych ofert</span>
+  </div>
+  <div class="stat-divider"></div>
+  <div class="stat-item">
+    <span class="stat-value"><%= stats.total_transactions %></span>
+    <span class="stat-label">Transakcji</span>
+  </div>
+  <div class="stat-divider"></div>
+  <div class="stat-item">
+    <span class="stat-value"><%= parseFloat(stats.total_volume || 0).toFixed(0) %> G</span>
+    <span class="stat-label">Obrót</span>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-header">
+    <h2 class="section-title">Najnowsze oferty</h2>
+    <a href="/items" class="btn btn-sm btn-ghost">Zobacz wszystkie →</a>
+  </div>
+  <% if (recentListings.length === 0) { %>
+    <div class="empty-state">
+      <p>Brak aktywnych ofert. <a href="/shop">Wejdź do sklepu</a> aby zdobyć pierwsze przedmioty!</p>
+    </div>
+  <% } else { %>
+    <div class="items-grid">
+      <% recentListings.forEach(item => { %>
+        <div class="item-card rarity-card-<%= item.rarity %>">
+          <div class="item-card-top">
+            <%- include('partials/rarity', { rarity: item.rarity }) %>
+            <span class="item-game"><%= item.game %></span>
+          </div>
+          <h3 class="item-name"><%= item.name %></h3>
+          <div class="item-card-bottom">
+            <span class="item-price"> <%= parseFloat(item.price).toFixed(2) %> G</span>
+            <span class="item-seller">od <%= item.seller %></span>
+          </div>
+          <% if (user && user.username !== item.seller) { %>
+            <form action="/transactions/buy/<%= item.listing_id %>" method="POST" class="buy-form">
+              <button type="submit" class="btn btn-primary btn-sm btn-full"
+                onclick="return confirm('Kupić <%= item.name %> za <%= parseFloat(item.price).toFixed(2) %> G?')">
+                Kup teraz
+              </button>
+            </form>
+          <% } else if (!user) { %>
+            <a href="/auth/login" class="btn btn-outline btn-sm btn-full">Zaloguj się</a>
+          <% } %>
+        </div>
+      <% }) %>
+    </div>
+  <% } %>
+</section>
+
+<%- include('partials/footer') %>

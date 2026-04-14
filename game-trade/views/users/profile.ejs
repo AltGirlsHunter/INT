@@ -1,0 +1,68 @@
+<%- include('../partials/header') %>
+
+<div class="page-header">
+  <div class="profile-header">
+    <div class="profile-avatar-lg"><%= profile.username.charAt(0).toUpperCase() %></div>
+    <div>
+      <h1 class="page-title"><%= profile.username %></h1>
+      <p class="page-sub">Gracz od <%= new Date(profile.created_at).toLocaleDateString('pl-PL') %></p>
+    </div>
+  </div>
+</div>
+
+<%- include('../partials/flash') %>
+
+<div class="profile-stats">
+  <div class="profile-stat">
+    <span class="stat-value"> <%= parseFloat(profile.balance).toFixed(2) %> G</span>
+    <span class="stat-label">Saldo</span>
+  </div>
+  <div class="profile-stat">
+    <span class="stat-value"><%= items.length %></span>
+    <span class="stat-label">Przedmiotów</span>
+  </div>
+  <div class="profile-stat">
+    <span class="stat-value"><%= items.filter(i => i.is_listed).length %></span>
+    <span class="stat-label">Na sprzedaż</span>
+  </div>
+</div>
+
+<div class="section-header">
+  <h2 class="section-title">Przedmioty gracza</h2>
+</div>
+
+<% if (items.length === 0) { %>
+  <div class="empty-state">
+    <p>Ten gracz nie posiada żadnych przedmiotów.</p>
+  </div>
+<% } else { %>
+  <div class="items-grid">
+    <% items.forEach(item => { %>
+      <div class="item-card rarity-card-<%= item.rarity %>">
+        <div class="item-card-top">
+          <%- include('../partials/rarity', { rarity: item.rarity }) %>
+          <% if (item.is_listed) { %>
+            <span class="badge badge-success">Na sprzedaż</span>
+          <% } %>
+        </div>
+        <div class="item-icon">⚔️</div>
+        <h3 class="item-name"><%= item.name %></h3>
+        <p class="item-desc"><%= item.description %></p>
+        <span class="item-game-tag"><%= item.game %></span>
+        <% if (item.is_listed && user && user.id !== profile.id) { %>
+          <div class="item-card-bottom">
+            <span class="item-price"> <%= parseFloat(item.price_listed).toFixed(2) %> G</span>
+          </div>
+          <form action="/transactions/buy/<%= item.listing_id %>" method="POST">
+            <button type="submit" class="btn btn-primary btn-sm btn-full"
+              onclick="return confirm('Kupić <%= item.name %>?')">
+              Kup teraz
+            </button>
+          </form>
+        <% } %>
+      </div>
+    <% }) %>
+  </div>
+<% } %>
+
+<%- include('../partials/footer') %>

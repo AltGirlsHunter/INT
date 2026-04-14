@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %> | GameTrade</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Share+Tech+Mono&family=Exo+2:ital,wght@0,300;0,400;0,600;0,800;1,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <nav class="navbar">
+    <a href="/" class="nav-brand">
+      <span class="brand-icon">⚔️</span>
+      <span class="brand-text">GAME<span class="accent">TRADE</span></span>
+    </a>
+    <div class="nav-links">
+      <a href="/items" class="nav-link">Rynek</a>
+      <a href="/shop" class="nav-link">Sklep</a>
+      <% if (user) { %>
+        <a href="/items/my" class="nav-link">Ekwipunek</a>
+        <a href="/transactions/history" class="nav-link">Historia</a>
+        <a href="/users" class="nav-link">Gracze</a>
+        <div class="nav-user">
+          <span class="nav-balance"> <%= parseFloat(user.balance).toFixed(2) %> G</span>
+          <span class="nav-username"><%= user.username %></span>
+          <form action="/auth/logout" method="POST" style="display:inline">
+            <button type="submit" class="btn btn-sm btn-ghost">Wyloguj</button>
+          </form>
+        </div>
+      <% } else { %>
+        <a href="/auth/login" class="btn btn-sm btn-outline">Logowanie</a>
+        <a href="/auth/register" class="btn btn-sm btn-primary">Rejestracja</a>
+      <% } %>
+    </div>
+  </nav>
+  <main class="main-content">

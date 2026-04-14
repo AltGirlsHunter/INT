@@ -1,0 +1,68 @@
+<%- include('../partials/header') %>
+
+<div class="page-header">
+  <h1 class="page-title">Historia transakcji</h1>
+  <p class="page-sub">Twoje ostatnie 50 transakcji</p>
+</div>
+
+<%- include('../partials/flash') %>
+
+<% if (transactions.length === 0) { %>
+  <div class="empty-state">
+    <h3>Brak transakcji</h3>
+    <p>Nie przeprowadzono jeszcze żadnych transakcji.</p>
+    <a href="/items" class="btn btn-primary">Idź na rynek</a>
+  </div>
+<% } else { %>
+  <div class="table-wrapper">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Przedmiot</th>
+          <th>Typ</th>
+          <th>Kierunek</th>
+          <th>Kwota</th>
+          <th>Sprzedający</th>
+          <th>Kupujący</th>
+          <th>Data</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% transactions.forEach(tx => { %>
+          <tr class="tx-row tx-<%= tx.direction %>">
+            <td class="tx-id">#<%= tx.id %></td>
+            <td>
+              <div class="tx-item">
+                <span class="tx-item-name"><%= tx.item_name %></span>
+                <%- include('../partials/rarity', { rarity: tx.rarity }) %>
+              </div>
+            </td>
+            <td>
+              <% if (tx.type === 'shop') { %>
+                <span class="badge badge-shop">Sklep</span>
+              <% } else { %>
+                <span class="badge badge-trade">Handel</span>
+              <% } %>
+            </td>
+            <td>
+              <% if (tx.direction === 'purchase') { %>
+                <span class="badge badge-purchase"> Kupno</span>
+              <% } else { %>
+                <span class="badge badge-sale"> Sprzedaż</span>
+              <% } %>
+            </td>
+            <td class="tx-price <%= tx.direction === 'purchase' ? 'price-negative' : 'price-positive' %>">
+              <%= tx.direction === 'purchase' ? '−' : '+' %><%= parseFloat(tx.price).toFixed(2) %> G
+            </td>
+            <td><%= tx.seller_name %></td>
+            <td><%= tx.buyer_name %></td>
+            <td class="tx-date"><%= new Date(tx.created_at).toLocaleString('pl-PL') %></td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+<% } %>
+
+<%- include('../partials/footer') %>

@@ -1,0 +1,51 @@
+<%- include('../partials/header') %>
+
+<div class="page-header">
+  <h1 class="page-title">Rynek graczy</h1>
+  <p class="page-sub">Przedmioty wystawione na sprzedaż przez innych graczy</p>
+</div>
+
+<%- include('../partials/flash') %>
+
+<% if (items.length === 0) { %>
+  <div class="empty-state">
+    <div class="empty-icon">📦</div>
+    <h3>Brak ofert na rynku</h3>
+    <p>Żaden gracz nie wystawił jeszcze przedmiotów na sprzedaż.</p>
+    <a href="/shop" class="btn btn-primary">Idź do sklepu</a>
+  </div>
+<% } else { %>
+  <div class="items-grid">
+    <% items.forEach(item => { %>
+      <div class="item-card rarity-card-<%= item.rarity %>">
+        <div class="item-card-top">
+          <%- include('../partials/rarity', { rarity: item.rarity }) %>
+          <span class="item-game"><%= item.game %></span>
+        </div>
+        <div class="item-icon">⚔️</div>
+        <h3 class="item-name"><%= item.name %></h3>
+        <p class="item-desc"><%= item.description %></p>
+        <div class="item-card-bottom">
+          <span class="item-price"> <%= parseFloat(item.price).toFixed(2) %> G</span>
+          <span class="item-seller">od <a href="/users/<%= item.seller %>"><%= item.seller %></a></span>
+        </div>
+        <% if (user) { %>
+          <% if (user.username !== item.seller) { %>
+            <form action="/transactions/buy/<%= item.listing_id %>" method="POST" class="buy-form">
+              <button type="submit" class="btn btn-primary btn-sm btn-full"
+                onclick="return confirm('Kupić <%= item.name %> za <%= parseFloat(item.price).toFixed(2) %> G?')">
+                 Kup za <%= parseFloat(item.price).toFixed(2) %> G
+              </button>
+            </form>
+          <% } else { %>
+            <span class="badge badge-info">Twoja oferta</span>
+          <% } %>
+        <% } else { %>
+          <a href="/auth/login" class="btn btn-outline btn-sm btn-full">Zaloguj się aby kupić</a>
+        <% } %>
+      </div>
+    <% }) %>
+  </div>
+<% } %>
+
+<%- include('../partials/footer') %>
