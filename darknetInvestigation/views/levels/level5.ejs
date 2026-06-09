@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>[POZIOM 5] Core — Darknet</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div class="page-center">
+  <div class="panel">
+    <div class="panel-header">
+      <span class="dot active"></span>
+      <span class="dot active"></span>
+      <span class="dot active"></span>
+      <span style="margin-left:8px; font-size:0.75rem; letter-spacing:0.14em; color:var(--amber-dim);">POZIOM 5 — RDZEŃ SYSTEMU</span>
+    </div>
+
+    <span class="badge badge--warn">DOSTĘP OGRANICZONY</span>
+    <h1 style="margin-top:10px;" class="cursor">CORE — RDZEŃ</h1>
+
+    <hr class="divider">
+
+    <p>Dostęp wymaga bezpośredniego wywołania funkcji systemowej.</p>
+    <p style="color:var(--amber-dim); font-size:0.82rem; margin-top:8px;">
+      Otwórz konsolę programisty (<kbd style="border:1px solid var(--border); padding:1px 6px;">F12</kbd>) i uruchom procedurę:
+    </p>
+
+    <div style="margin: 18px 0; background:#050504; border:1px solid var(--border); padding:14px;">
+      <code style="font-size:1rem; background:transparent; border:none; color:var(--amber);">crackSystem()</code>
+    </div>
+
+    <p style="font-size:0.75rem; color:var(--amber-dim);">
+      Zainicjuje łamanie haseł i przejęcie kontroli nad systemem.
+    </p>
+
+    <hr class="divider">
+    <a href="/" style="font-size:0.78rem; border:none; color:var(--amber-dim);">&larr; Powrót do panelu</a>
+  </div>
+</div>
+
+<script>
+  function crackSystem() {
+    console.log("%c[SYSTEM] Inicjalizacja łamania haseł...", "color:#e8a020");
+    setTimeout(() => {
+      alert("SYSTEM SHUTDOWN: Przejmowanie kontroli...");
+      window.location.href = "/final-message";
+    }, 1000);
+  }
+</script>
+</body>
+</html>

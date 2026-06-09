@@ -1,0 +1,6 @@
+User-agent: *
+Disallow: /private/
+Disallow: /config/
+
+# Wskazówka dla Poziomu 4:
+# Terminal dostępowy znajduje się pod: /deep-web/terminal

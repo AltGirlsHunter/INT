@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Terminal Login — Darknet</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div class="page-center">
+  <div class="panel">
+    <div class="panel-header">
+      <span class="dot red"></span>
+      <span class="dot"></span>
+      <span class="dot active"></span>
+      <span style="margin-left:8px; font-size:0.75rem; letter-spacing:0.14em; color:var(--amber-dim);">SYSTEM_LOGIN — TERMINAL v2.1</span>
+    </div>
+
+    <h1 class="cursor">AUTORYZACJA</h1>
+    <p style="color:var(--amber-dim); font-size:0.8rem; margin: 8px 0 24px;">Wprowadź dane dostępowe agenta.</p>
+
+    <form action="/login" method="POST">
+      <div class="field">
+        <label>Identyfikator</label>
+        <input type="text" name="username" autocomplete="off" required>
+      </div>
+      <div class="field">
+        <label>Hasło</label>
+        <input type="password" name="password" required>
+      </div>
+      <button type="submit" class="btn" style="width:100%; margin-top:6px;">AUTORYZUJ DOSTĘP</button>
+    </form>
+
+    <hr class="divider">
+    <p style="font-size:0.78rem; color:var(--amber-dim);">Brak konta? <a href="/register">Zarejestruj agenta &rarr;</a></p>
+  </div>
+</div>
+</body>
+</html>

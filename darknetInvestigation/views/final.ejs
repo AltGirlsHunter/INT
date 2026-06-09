@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Misja Zakończona — Darknet</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <style>
+    @keyframes pulse-border {
+      0%, 100% { box-shadow: var(--glow-md); }
+      50%       { box-shadow: 0 0 50px rgba(57,211,83,0.6); }
+    }
+    .win-panel {
+      animation: pulse-border 2.5s ease-in-out infinite;
+      border-color: var(--green-ok) !important;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+<div class="page-center">
+  <div class="panel win-panel">
+    <div class="panel-header" style="justify-content:center; border-color:var(--green-ok);">
+      <span class="dot green"></span>
+      <span class="dot green"></span>
+      <span class="dot green"></span>
+    </div>
+
+    <span class="badge badge--ok">MISJA WYKONANA</span>
+
+    <h1 style="font-size:3.5rem; margin: 14px 0; color:var(--green-ok); text-shadow: 0 0 24px rgba(57,211,83,0.7);">
+      DOSTĘP PEŁNY
+    </h1>
+
+    <hr class="divider" style="border-color:var(--green-ok);">
+
+    <p style="margin-bottom:6px;">Uzyskałeś pełny dostęp do Darknetu.</p>
+    <p style="color:var(--amber-dim); font-size:0.85rem;">Wszystkie dane zostały pobrane. Operacja zakończona sukcesem.</p>
+
+    <div style="margin-top:28px;">
+      <a href="/logout" class="btn btn--success">ZAMKNIJ SESJĘ</a>
+    </div>
+  </div>
+</div>
+</body>
+</html>

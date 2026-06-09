@@ -1,14 +1,6 @@
 const mongoose = require('mongoose');
 
-const clamp = (val) => Math.min(100, Math.max(0, val));
-
 const petSchema = new mongoose.Schema({
-  owner: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
-    required: true,
-    unique: true
-  },
   name: {
     type: String,
     required: true,
@@ -35,20 +27,48 @@ const petSchema = new mongoose.Schema({
   createdAt: {
     type: Date,
     default: Date.now
+  },
+  lastUpdated: {
+    type: Date,
+    default: Date.now
+  },
+  owner: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: true,
+    unique: true
   }
 });
 
-petSchema.methods.applyTimePassing = function () {
-  this.hunger   = clamp(this.hunger   + 1);
-  this.energy   = clamp(this.energy   - 1);
-  this.happiness= clamp(this.happiness- 1);
+petSchema.methods.applyTimePassage = function() {
+  const now = new Date();
+  const diffMs = now - this.lastUpdated;
+  const diffTicks = Math.floor(diffMs / 10000); 
+
+  if (diffTicks > 0) {
+    this.hunger = Math.min(100, this.hunger + diffTicks);
+    this.energy = Math.max(0, this.energy - diffTicks);
+    this.happiness = Math.max(0, this.happiness - diffTicks);
+    this.lastUpdated = now;
+  }
 };
 
-petSchema.methods.getStatus = function () {
-  const statuses = [];
-  if (this.hunger === 100) statuses.push('bardzo głodny');
-  if (this.energy === 0)   statuses.push('wyczerpany');
-  return statuses;
+petSchema.methods.feed = function() {
+  this.hunger = Math.min(100, this.hunger + 20);
+  this.happiness = Math.min(100, this.happiness + 5);
 };
 
-module.exports = mongoose.model('Pet', petSchema);
+petSchema.methods.play = function() {
+  this.energy = Math.max(0, this.energy - 15);
+  this.happiness = Math.min(100, this.happiness + 15);
+  this.hunger = Math.max(0, this.hunger - 5);
+};
+
+petSchema.methods.sleep = function() {
+  this.energy = Math.min(100, this.energy + 25);
+  this.happiness = Math.max(0, this.happiness - 5);
+};
+
+const Pet = mongoose.model('Pet', petSchema);
+
+module.exports = Pet;

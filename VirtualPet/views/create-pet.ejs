@@ -2,18 +2,23 @@
 <html lang="pl">
 <head>
   <meta charset="UTF-8">
-  <title>Stwórz zwierzaka – Virtual Pet</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stwórz zwierzaka - Virtual Pet</title>
+
 </head>
 <body>
-  <h1>Stwórz swojego zwierzaka</h1>
-  <% if (error) { %>
-    <p style="color:red;"><%= error %></p>
-  <% } %>
-  <form method="POST" action="/pet/create">
-    <label>Imię zwierzaka:<br>
-      <input type="text" name="name" required>
-    </label><br><br>
-    <button type="submit">Stwórz</button>
-  </form>
+  <div>
+    <h1>Stwórz swojego zwierzaka</h1>
+    <% if (typeof error !== 'undefined' && error) { %>
+      <p><%= error %></p>
+    <% } %>
+    <form action="/pet/create" method="POST">
+      <div>
+        <label for="name">Nazwa zwierzaka</label>
+        <input type="text" id="name" name="name" required>
+      </div>
+      <button type="submit">Stwórz</button>
+    </form>
+  </div>
 </body>
 </html>

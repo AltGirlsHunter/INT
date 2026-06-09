@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>[POZIOM 2] Protokół — Darknet</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div class="page-center">
+  <div class="panel panel--alert">
+    <div class="panel-header">
+      <span class="dot red"></span>
+      <span class="dot red"></span>
+      <span class="dot"></span>
+      <span style="margin-left:8px; font-size:0.75rem; letter-spacing:0.14em; color:var(--red-alert);">POZIOM 2 — NARUSZENIE PROTOKOŁU</span>
+    </div>
+
+    <span class="badge badge--alert">ZABLOKOWANO</span>
+    <h1 style="margin-top:10px; color:var(--red-alert); text-shadow: 0 0 10px rgba(204,34,0,0.6);">WYKRYTO NARUSZENIE</h1>
+
+    <hr class="divider">
+
+    <p style="color:var(--red-alert); margin-bottom:10px;">
+      Dostęp do modułu transferu danych jest zablokowany dla standardowych użytkowników.
+    </p>
+    <p style="color:var(--amber-dim); font-size:0.82rem;">
+      System oczekuje flagi debugowania w zapytaniu URL, aby otworzyć bezpieczne połączenie.
+    </p>
+    <p style="margin-top:14px; font-size:0.82rem;">
+      Spróbuj wejść na <code>/secure/data-transfer</code> z odpowiednim parametrem.<br>
+      Sprawdź nagłówki HTTP (F12 &rarr; Network) lub zgadnij parametr.
+    </p>
+
+    <hr class="divider">
+    <a href="/" style="font-size:0.78rem; border:none; color:var(--amber-dim);">&larr; Powrót do panelu</a>
+  </div>
+</div>
+
+<script>
+  console.log("%c[SYSTEM LOG]", "color:#e8a020; font-weight:bold;");
+  console.log("Oczekiwanie na parametr 'debug' ustawiony na 'true'...");
+</script>
+</body>
+</html>

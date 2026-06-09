@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Twój Ekwipunek</title>
+    <style>
+        .item-card { border: 1px solid #ccc; padding: 15px; margin-bottom: 10px; border-radius: 5px; background: #fff; }
+        .trade-box { margin-top: 10px; padding: 10px; background: #f0f0f0; border: 1px dashed #999; }
+    </style>
+</head>
+<body>
+    <h1>🎒 Twój Ekwipunek</h1>
+    <p>Dostępne środki: <strong><%= user.balance %> $</strong></p>
+    <hr>
+
+    <% if (user.inventory && user.inventory.length > 0) { %>
+        <% user.inventory.forEach(item => { %>
+            <div class="item-card">
+                <strong><%= item.name %></strong> — Wartość: <%= item.price %> $
+                
+                <form action="/shop/sell/<%= item.instanceId %>" method="POST" style="display:inline; margin-left: 10px;">
+                    <button type="submit" style="color: white; background: red; border: none; padding: 5px 10px; cursor: pointer;">
+                        Sprzedaj na rynku
+                    </button>
+                </form>
+
+                <div class="trade-box">
+                    <form action="/trade/send" method="POST">
+                        <input type="hidden" name="itemId" value="<%= item.instanceId %>">
+                        <input type="email" name="receiverEmail" placeholder="Email odbiorcy" required>
+                        <button type="submit" style="background-color: #4CAF50; color: white; border: none; padding: 5px 10px; cursor: pointer;">
+                            Wyślij do gracza
+                        </button>
+                    </form>
+                </div>
+            </div>
+        <% }) %>
+    <% } else { %>
+        <p>Twój ekwipunek jest pusty. Kup coś w sklepie!</p>
+    <% } %>
+
+    <hr>
+    <a href="/shop">🛒 Powrót do sklepu</a> | <a href="/trade/history">📜 Historia handlu</a>
+</body>
+</html>

@@ -1,0 +1,13 @@
+<h1>Historia Handlu</h1>
+<table border="1">
+    <tr><th>Data</th><th>Przedmiot</th><th>Typ</th><th>Partner</th></tr>
+    <% history.forEach(t => { %>
+        <tr>
+            <td><%= t.date.toLocaleString() %></td>
+            <td><%= t.itemName %></td>
+            <td><%= t.senderEmail === myEmail ? 'WYŁANO' : 'OTRZYMANO' %></td>
+            <td><%= t.senderEmail === myEmail ? t.receiverEmail : t.senderEmail %></td>
+        </tr>
+    <% }) %>
+</table>
+<a href="/shop">Powrót</a>

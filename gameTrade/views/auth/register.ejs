@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head><title>Rejestracja</title></head>
+<body>
+    <h1>Stwórz konto</h1>
+    <form action="/auth/register" method="POST">
+        <input type="email" name="email" placeholder="Email" required><br><br>
+        <input type="password" name="password" placeholder="Hasło" required><br><br>
+        <button type="submit">Zarejestruj</button>
+    </form>
+    <p>Masz już konto? <a href="/auth/login">Zaloguj się</a></p>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<h1>Sklep</h1>
+<p>Saldo: <strong><%= user.balance %> $</strong></p>
+
+<hr>
+<h3>Dostępne towary:</h3>
+<ul>
+    <% if (items.length > 0) { %>
+        <% items.forEach(item => { %>
+            <li>
+                <%= item.name %> - <%= item.price %> $
+                <form action="/shop/buy/<%= item._id %>" method="POST" style="display:inline;">
+                    <button type="submit">Kup teraz</button>
+                </form>
+            </li>
+        <% }) %>
+    <% } else { %>
+        <p>Sklep jest obecnie pusty!</p>
+    <% } %>
+</ul>
+
+<hr>
+<a href="/shop/inventory">🎒 Zobacz mój ekwipunek</a> | <a href="/auth/logout">Wyloguj</a>

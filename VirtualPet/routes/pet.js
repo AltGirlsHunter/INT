@@ -1,17 +1,19 @@
 const express = require('express');
 const router = express.Router();
+
 const { requireAuth } = require('../middleware/auth');
-const service = require('../services/petServices')
+const controller = require('../controller/pet-controller');
 
-router.get('/', requireAuth, service.render);
+router.get('/', requireAuth, controller.getPet);
 
-router.post('/create', requireAuth, service.createPet);
+router.get('/create', requireAuth, controller.createPetForm);
 
-router.post('/feed', requireAuth, service.feedPet);
+router.post('/create', requireAuth, controller.createPet);
 
-router.post('/play', requireAuth, service.playWithPet);
+router.post('/feed', requireAuth, controller.feedPet);
 
+router.post('/play', requireAuth, controller.playPet);
 
-router.post('/sleep', requireAuth, service.makePetSleep);
+router.post('/sleep', requireAuth, controller.sleepPet);
 
 module.exports = router;
